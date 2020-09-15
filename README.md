@@ -50,7 +50,7 @@
 
 [一代线性分析](https://github.com/AgentGuo/HUST_course_design_of_cryptography/tree/master/linearAnalysis)
 
-[二代线性分析]()(https://github.com/AgentGuo/HUST_course_design_of_cryptography/tree/master/linearAnalysis_v2)
+[二代线性分析](https://github.com/AgentGuo/HUST_course_design_of_cryptography/tree/master/linearAnalysis_v2)
 
 然并卵 T_T  超时！！！！遂即当场重写SPN T_T  （此时心态爆炸）
 
