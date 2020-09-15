@@ -1,8 +1,10 @@
 #include<iostream>
 #include<string.h>
 using namespace std;
+// S盒
 short int substitution[2][16] = { { 14, 4, 13, 1, 2, 15, 11, 8, 3, 10, 6, 12, 5, 9, 0, 7 }, {14, 3, 4, 8, 1, 12, 10, 15, 7, 13, 9, 6, 11, 2, 0, 5} };
 //short int permutationList[16] = { 0, 4, 8, 12, 1, 5, 9, 13, 2, 6, 10, 14, 3, 7, 11, 15 };
+// 字段结构体
 struct bit16 {
 	unsigned short key16 : 1, key15 : 1, key14 : 1, key13 : 1,
 		key12 : 1, key11 : 1, key10 : 1, key9 : 1,
@@ -12,12 +14,14 @@ struct bit16 {
 struct bit4 {
 	unsigned short key4 : 4, key3 : 4, key2 : 4, key1 : 4;
 };
+// 联合
 union shortInt
 {
 	unsigned short num;
 	bit16 numBit16;
 	bit4 numBit4;
 };
+// P盒
 void permutation(shortInt &after, int mode) {
 	shortInt before = after;
 	if (mode == 0) {
@@ -53,6 +57,7 @@ void permutation(shortInt &after, int mode) {
 		after.numBit16.key12 = before.numBit16.key15;
 	}
 }
+// SPN 参数说明：密钥， 明文， 模式（0：加密， 1：解密）
 void SPN(shortInt k[5], shortInt &plaintext, int mode) {
 	if (mode == 1) {
 		for (int i = 1; i < 4; i++) {
@@ -119,10 +124,10 @@ int main()
 		//	temp1 >>= 4;
 		//}
 
-		SPN(k, plaintext, 0);
+		SPN(k, plaintext, 0);		// 加密
 		printf(" ");
-		plaintext.numBit16.key16 = ~(plaintext.numBit16.key16);
-		SPN(k, plaintext, 1);
+		plaintext.numBit16.key16 = ~(plaintext.numBit16.key16);		// 最后一位取反
+		SPN(k, plaintext, 1);		// 解密
 		printf("\n");
 	}
 	return 0;
