@@ -8,6 +8,8 @@
 
 #### 1.1 初次写SPN
 
+[初代SPN](https://github.com/AgentGuo/HUST_course_design_of_cryptography/tree/master/SPN)
+
 为了方便的使用S盒P盒的那些运算（直接使用数组， 而不使用位运算），所以想起了C语言课上学的**字段结构体和联合**，but程序跑太慢了~（最后一个数据大概有 $4 \times 10^6$ 个）
 
 ![image](https://github.com/AgentGuo/HUST_course_design_of_cryptography/blob/master/image/2.png)
@@ -19,6 +21,8 @@
 ![image](https://github.com/AgentGuo/HUST_course_design_of_cryptography/blob/master/image/3.png)
 
 #### 1.3 再次加速
+
+[二代SPN](https://github.com/AgentGuo/HUST_course_design_of_cryptography/tree/master/SPN_v2)
 
 速度跑的还是太慢了，影响后面线性分析的效率，所以又回来重写一波~
 
@@ -44,11 +48,17 @@
 
 #### 2.2 写代码
 
+[一代线性分析](https://github.com/AgentGuo/HUST_course_design_of_cryptography/tree/master/linearAnalysis)
+
+[二代线性分析]()(https://github.com/AgentGuo/HUST_course_design_of_cryptography/tree/master/linearAnalysis_v2)
+
 然并卵 T_T  超时！！！！遂即当场重写SPN T_T  （此时心态爆炸）
 
 重写起飞，跑得飞快，芜湖~~~
 
 ## 3.差分分析
+
+[差分分析](https://github.com/AgentGuo/HUST_course_design_of_cryptography/tree/master/differentialAnalysis)
 
 通过了线性分析，差分分析就是个dd（口头虽然这么说， 但是链也是找了我半天 T_T）
 
@@ -63,6 +73,8 @@
 没啥，在线性分析的基础上随便改改hhh
 
 ## 4.SPN加强
+
+[SPN加强](https://github.com/AgentGuo/HUST_course_design_of_cryptography/tree/master/SPN_enhance)
 
 #### 4.1 初次加强
 
