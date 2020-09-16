@@ -2,6 +2,7 @@
 #include <iostream>
 #include <stdio.h>
 using namespace std;
+#define DEBUG 1
 bool isPrime(mpz_t n){
         int count = 0;
         gmp_randstate_t state;
@@ -46,6 +47,42 @@ bool isPrime(mpz_t n){
         //gmp_printf("%Zd\n",n);
         return false;           // 不是素数
 }
+bool gcdIsOne(mpz_t a, mpz_t b){
+        mpz_t temp;
+        mpz_init(temp);
+        mpz_mod(temp, a, b);
+        // #ifdef DEBUG
+        // gmp_printf("a = %Zd\n",a);
+        // gmp_printf("b = %Zd\n",b);
+        // gmp_printf("temp = %Zd\n",temp);
+        // #endif
+        while(mpz_cmp_ui(temp, 0) != 0){
+                mpz_init_set(a, b);
+                mpz_init_set(b, temp);
+                mpz_mod(temp, a, b);
+                // #ifdef DEBUG
+                // gmp_printf("a = %Zd\n",a);
+                // gmp_printf("b = %Zd\n",b);
+                // gmp_printf("temp = %Zd\n",temp);
+                // #endif
+        }
+        // if(mpz_cmp(a, b) > 0){
+        //         mpz_div(temp, a, b);
+        // }
+        // else{
+        //         mpz_div(temp, b, a);
+        // }
+        #ifdef DEBUG
+        gmp_printf("gcd = %Zd\n",b);
+        #endif
+        
+        if(mpz_cmp_ui(b, 1) == 0){
+                return true;
+        }
+        else{
+                return false;
+        }
+}
 int main()
 {
         int n;
@@ -55,14 +92,21 @@ int main()
         mpz_init(q);
         scanf("%d", &n);
         for(int i = 0; i < n; i++){
-                gmp_scanf("%Zd%Zd%Zd",e,p,q);
+                // gmp_scanf("%Zd%Zd%Zd",e,p,q);
                 //gmp_scanf("%Zd",p);
-                if(isPrime(p) && isPrime(q)){
-                                cout<<"prime"<<endl;
+                gmp_scanf("%Zd%Zd",p,q);
+                if(gcdIsOne(p,q)){
+                        cout<<"yes"<<endl;
                 }
                 else{
-                        cout<<"ERROR"<<endl;
+                        cout<<"No"<<endl;
                 }
+                // if(isPrime(p) && isPrime(q)){
+                //         cout<<"prime"<<endl;
+                // }
+                // else{
+                //         cout<<"ERROR"<<endl;
+                // }
         }
         // mpz_add(c,a,b);
         // gmp_printf("c= %Zd\n",c);
