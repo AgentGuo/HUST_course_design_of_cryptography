@@ -13,6 +13,7 @@ bool isPrime(mpz_t paraN){
         mpz_init(t);
         mpz_init(temp);
         mpz_init_set(n, paraN);
+        mpz_init_set(n, paraN);
         mpz_set(t, n);
         mpz_sub_ui(t,t,1);
         mpz_mod_ui(b, t, 2);
@@ -25,7 +26,7 @@ bool isPrime(mpz_t paraN){
         if(count == 0){
                 return false;           // 偶数直接排除
         }
-        for(int i = 0; i < 200; i++){
+        for(int i = 0; i < 300; i++){
                 //mpz_init_set_ui(a, 4);
                 mpz_urandomm(a, state, n);              // 随机选择a
                 if(mpz_cmp_ui(a, 0) != 0 && mpz_cmp_ui(a, 1) != 0){
@@ -68,10 +69,34 @@ bool gcdIsOne(mpz_t paraA, mpz_t paraB){
                 return false;
         }
 }
+bool gcdIsBig(mpz_t paraA, mpz_t paraB){
+        mpz_t temp, a, b;
+        mpz_init(temp);
+        mpz_init(a);
+        mpz_init(b);
+        mpz_init_set(a, paraA);
+        mpz_init_set(b, paraB);
+        mpz_mod(temp, a, b);
+        while(mpz_cmp_ui(temp, 0) != 0){
+                mpz_init_set(a, b);
+                mpz_init_set(b, temp);
+                mpz_mod(temp, a, b);
+        }
+        #ifdef DEBUG
+        gmp_printf("gcd = %Zd\n",b);
+        #endif
+        mpz_init_set(a, paraA);
+        if(mpz_cmp_ui(b, 100000) > 0){
+                return true;
+        }
+        else{
+                return false;
+        }
+}
 void calD(mpz_t e, mpz_t p, mpz_t q){
-        mpz_t st[300];
+        mpz_t st[5000];
         int count = -1;
-        for(int i = 0; i < 100; i++){
+        for(int i = 0; i < 5000; i++){
                 mpz_init(st[i]);
         }
         mpz_t phi, temp, temp1, temp2;
@@ -101,6 +126,10 @@ void calD(mpz_t e, mpz_t p, mpz_t q){
         }
         mpz_sub_ui(p, p, 1);
         mpz_sub_ui(q, q, 1);
+        if(gcdIsBig(p,q)){
+                printf("ERROR\n");
+                return;
+        }
         mpz_mul(phi, p, q);
         mpz_init_set_ui(temp, 0);
         mpz_sub(phi, temp, phi);
@@ -149,7 +178,7 @@ void calD(mpz_t e, mpz_t p, mpz_t q){
 int main()
 {
         int n;
-        //freopen("1.in", "r", stdin);
+        //freopen("2.in", "r", stdin);
         mpz_t e,p,q;
         mpz_init(e);
         mpz_init(p);
