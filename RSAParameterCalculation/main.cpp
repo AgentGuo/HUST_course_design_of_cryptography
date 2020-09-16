@@ -1,4 +1,5 @@
 #include <gmp.h>
+#include<stack>
 #include <iostream>
 #include <stdio.h>
 using namespace std;
@@ -51,27 +52,11 @@ bool gcdIsOne(mpz_t a, mpz_t b){
         mpz_t temp;
         mpz_init(temp);
         mpz_mod(temp, a, b);
-        // #ifdef DEBUG
-        // gmp_printf("a = %Zd\n",a);
-        // gmp_printf("b = %Zd\n",b);
-        // gmp_printf("temp = %Zd\n",temp);
-        // #endif
         while(mpz_cmp_ui(temp, 0) != 0){
                 mpz_init_set(a, b);
                 mpz_init_set(b, temp);
                 mpz_mod(temp, a, b);
-                // #ifdef DEBUG
-                // gmp_printf("a = %Zd\n",a);
-                // gmp_printf("b = %Zd\n",b);
-                // gmp_printf("temp = %Zd\n",temp);
-                // #endif
         }
-        // if(mpz_cmp(a, b) > 0){
-        //         mpz_div(temp, a, b);
-        // }
-        // else{
-        //         mpz_div(temp, b, a);
-        // }
         #ifdef DEBUG
         gmp_printf("gcd = %Zd\n",b);
         #endif
@@ -81,6 +66,38 @@ bool gcdIsOne(mpz_t a, mpz_t b){
         }
         else{
                 return false;
+        }
+}
+void calD(mpz_t e, mpz_t p, mpz_t q){
+        stack<mpz_t> q;
+        mpz_t phi, temp;
+        mpz_init(phi);
+        mpz_init(temp);
+        mpz_sub(temp, p, q);
+        mpz_abs(temp, temp);
+        if(!(isPrime(p) && isPrime(q))){                // p, q不是素数
+                printf("ERROR");
+                return;
+        }
+        if(mpz_cmp_ui(temp, 100) < 0){              // p,q差值过小
+                printf("ERROR");
+                return;
+        }
+        mpz_sub_ui(p, p, 1);
+        mpz_sub_ui(q, q, 1);
+        mpz_mul(phi, p, q);
+        if(!gcdIsOne(e, phi)){          // e和phi不互素
+                printf("ERROR");
+                return;
+        }
+        // 求解d
+        mpz_t temp;
+        mpz_init(temp);
+        mpz_mod(temp, a, b);
+        while(mpz_cmp_ui(temp, 0) != 0){
+                mpz_init_set(a, b);
+                mpz_init_set(b, temp);
+                mpz_mod(temp, a, b);
         }
 }
 int main()
