@@ -88,6 +88,8 @@
 
 ## 5.RSA参数计算
 
+[RSA参数计算](https://github.com/AgentGuo/HUST_course_design_of_cryptography/tree/master/RSAParameterCalculation)
+
 #### 5.1 素性检测(Miller-Rabin算法)
 
 密码学全忘光光了啊 T_T , 看会视频复习一下～
@@ -102,4 +104,10 @@
 
 感觉是核心过程了，加油！
 
-写是写好了，但是对于错误情况还有的没有考虑到，p,q过于平滑？这是啥？？（开始翻资料！！）
+写是写好了，但是对于错误情况还有的没有考虑到，p-1,q-1过于平滑？这是啥？？（开始翻资料！！）
+
+#### 5.4 光滑的判断
+
+p-1和q-1过于光滑就是gcd(p-1, q-1)不是太大？
+
+学到了学到了，也是终于把这个写好了～芜湖～～
