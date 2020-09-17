@@ -1,0 +1,4 @@
+﻿cl : 命令行 warning D9025: 正在重写“/sdl”(用“/GS-”)
+  源.cpp
+D:\大三上\密码学课设\modularRepeatedSquare\modularRepeatedSquare\gmp.h(2126,31): warning C4146: 一元负运算符应用于无符号类型，结果仍为无符号类型
+  modularRepeatedSquare.vcxproj -> D:\大三上\密码学课设\modularRepeatedSquare\Debug\modularRepeatedSquare.exe

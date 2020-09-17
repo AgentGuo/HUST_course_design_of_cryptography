@@ -1,6 +1,6 @@
 # HUST_2018级密码学课程设计
 
-## 1. SPN
+## 1.SPN
 
 就是如图所示的一个过程！
 
@@ -88,7 +88,7 @@
 
 ## 5.RSA参数计算
 
-[RSA参数计算](https://github.com/AgentGuo/HUST_course_design_of_cryptography/tree/master/RSAParameterCalculation)
+[RSA参数计算](https://github.com/AgentGuo/HUST_course_design_of_cryptography/tree/master/RSAParameterCalculation) 这个项目是再ubuntu使用vscode完成的（由于windows半天都没有装好gmp库）
 
 #### 5.1 素性检测(Miller-Rabin算法)
 
@@ -111,3 +111,10 @@
 p-1和q-1过于光滑就是gcd(p-1, q-1)不是太大？
 
 学到了学到了，也是终于把这个写好了～芜湖～～
+
+## 6.模重复平方
+
+主要就是一个计算`a^e(mod N)`的过程，但是是用于RSA加密过程，给出参数`e, m, p, q`（分别为加密密钥，明文，参数p，q），所以还需要配合使用中国剩余定理进行计算~
+
+芜湖，这算是写的最轻松的一个课设了，一遍过，起飞~~ (^_^)
+
