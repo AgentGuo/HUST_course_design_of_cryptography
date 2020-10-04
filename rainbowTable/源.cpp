@@ -17,7 +17,7 @@ void getstr(unsigned n, char str[8])
 		n = n / 36;
 	}
 }
-void R(unsigned sha1[5], char str[8], int i)
+inline void R(unsigned sha1[5], char str[8], int i)
 {
 	getstr((sha1[0] + sha1[1] * i) % 2176782336, str);
 }
@@ -27,7 +27,7 @@ unsigned int SHA1_tmp;
 
 #define SHA1_F(B,C,D,t) ((t<40)?((t<20)?((B&C)|((~B)&D)):(B^C^D)):((t<60)?((B&C)|(B&D)|(C&D)):(B^C^D)))
 
-int UnitSHA1(const char* str, int length, unsigned sha1[5]) {
+inline int UnitSHA1(const char* str, int length, unsigned sha1[5]) {
 	/*
 	计算字符串SHA-1
 	参数说明：
@@ -71,6 +71,7 @@ bool findStr(char str[9], unsigned sha1[5]) {
 	char strTemp[9];
 	for (int i = 0; i < m; i++) {
 		if (strcmp(str, endStr[i]) == 0) {
+			//cout << endStr[i] << endl;
 			strcpy(strTemp, startStr[i]);
 			for (int j = 0; j < 100000; j++) {
 				UnitSHA1(strTemp, 8, sha1Temp);		// 得到sha1
@@ -83,16 +84,17 @@ bool findStr(char str[9], unsigned sha1[5]) {
 					strcpy(str, strTemp);
 					return true;
 				}
-				R(sha1Temp, strTemp, i % 100 + 1);	// 得到str
+				R(sha1Temp, strTemp, j % 100 + 1);	// 得到str
 			}
 		}
 	}
 	return false;
 }
 int main() {
+	//freopen("1.in", "r", stdin);
 	bool findFlag = false;
 	unsigned sha1[5], sha1Temp[5];// = { 0x0f78779a , 0x24c55d7b, 0x6a10faad, 0x18f55ad3, 0x8023016f };
-	char str[9];
+	char str[9] = { 0 };
 	scanf("%d", &m);
 	for (int i = 0; i < m; i++) {
 		scanf("%s%s", startStr[i], endStr[i]);
@@ -102,8 +104,8 @@ int main() {
 	for (int i = 0; i < 100; i++) {
 		for (int j = 0; j < 5; j++)
 			sha1Temp[j] = sha1[j];
-		for (int j = 0; j < 10000; j++) {
-			R(sha1Temp, str, (i+j) % 100 + 1);	// 得到str
+		for (int j = 0; j < (i <= 1?100000:10000); j++) {
+			R(sha1Temp, str, (i + j) % 100 + 1);	// 得到str
 			findFlag = findStr(str, sha1);
 			if (findFlag)
 				break;
@@ -113,7 +115,7 @@ int main() {
 			break;
 	}
 	if (findFlag) {
-		printf("%s", str);
+		printf("%s\n", str);
 	}
 	else {
 		printf("None\n");

@@ -152,6 +152,12 @@ p-1和q-1过于光滑就是gcd(p-1, q-1)不是太大？
 
 ## 10. 彩虹表
 
+[彩虹表](https://github.com/AgentGuo/HUST_course_design_of_cryptography/tree/master/rainbowTable)
+
 感觉还是比较简单的，OJ时间卡得也不死，信心满满的开始。。。
 
 PA..PA..总是PA....，时间不早了~ 意料之中的结束T_T，不过还好不是RA~
+
+通过一顿分析老师给的仅有的一个样例，终于找到bug了，又是一波脑淤血操作，100000写成了10000，这bug找了我两小时？？？T_T
+
+不过总蒜过了！芜湖~
